@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "com.example.android.codelabs.navigation",
+                 "sha256_cert_fingerprints": ["F0:12:2D:11:F0:5C:6D:2D:C3:AE:55:BF:E6:07:19:04:19:C0:BE:57:2E:C1:6B:19:EC:0D:DA:64:38:B1:46:7D"] }
+  }]
