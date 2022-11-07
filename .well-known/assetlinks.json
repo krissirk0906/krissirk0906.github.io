@@ -1,5 +1,11 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target" : { "namespace": "android_app", "package_name": "com.example.android.codelabs.navigation",
-               "sha256_cert_fingerprints": ["58:B4:E6:A5:3F:31:51:76:FA:C4:65:4E:B6:13:FB:D2:8D:4E:C3:A3:FA:F2:D6:B1:A9:68:CE:50:85:BA:4B:5E"] }
-}]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "vn.intelin.affina",
+      "sha256_cert_fingerprints":
+        ["51:6E:CD:86:F9:09:BA:C4:1C:71:65:79:EC:69:70:A4:0C:CA:73:B1:07:04:98:15:04:56:E2:B2:BE:18:50:80"]
+    }
+  }
+]
