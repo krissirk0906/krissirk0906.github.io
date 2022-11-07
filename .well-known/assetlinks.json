@@ -1,11 +1,9 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "vn.intelin.affina",
-      "sha256_cert_fingerprints":
-        ["51:6E:CD:86:F9:09:BA:C4:1C:71:65:79:EC:69:70:A4:0C:CA:73:B1:07:04:98:15:04:56:E2:B2:BE:18:50:80"]
-    }
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "vn.intelin.affina",
+    "sha256_cert_fingerprints":
+    ["3D:BA:51:9D:D2:FD:F2:B7:43:DF:97:2C:97:C8:E7:89:C3:33:21:49:6E:90:EC:F1:A7:A2:55:0B:8A:2D:D6:B0"]
   }
-]
+}]
