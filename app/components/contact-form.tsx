@@ -5,17 +5,30 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useState } from "react"
-import { submitContactForm } from "../actions"
 
 export default function ContactForm() {
   const [pending, setPending] = useState(false)
   const [message, setMessage] = useState("")
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     setPending(true)
     try {
-      const response = await submitContactForm(formData)
-      setMessage(response.message)
+      const formData = new FormData(e.currentTarget)
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+      
+      if (response.ok) {
+        setMessage("Thanks for your message! I'll get back to you soon.")
+        e.currentTarget.reset()
+      } else {
+        setMessage("Something went wrong. Please try again.")
+      }
     } catch (error) {
       setMessage("Something went wrong. Please try again.")
     } finally {
@@ -25,7 +38,7 @@ export default function ContactForm() {
 
   return (
     <Card className="p-6">
-      <form action={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-2">
             Name
