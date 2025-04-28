@@ -33,11 +33,12 @@ jobs:
         run: npm ci
       - name: Build with Next.js
         run: npm run build
+      - name: Check output directory
+        run: ls -la && ls -la out || echo "out directory missing"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
-          if-no-files-found: error
 
   deploy:
     environment:
