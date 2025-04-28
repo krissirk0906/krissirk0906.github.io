@@ -32,12 +32,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build with Next.js
-        run: |
-          npm run build
-          mkdir -p out
-          cp -r .next/static/* out/
-          cp -r public/* out/ 2>/dev/null || true
-          cp -r .next/server/pages/* out/ 2>/dev/null || true
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
