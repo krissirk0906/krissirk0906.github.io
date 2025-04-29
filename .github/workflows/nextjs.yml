@@ -37,7 +37,9 @@ jobs:
             exit 1
           fi
           # Ensure static assets are properly copied
-          cp -r public/* out/ || true
+          mkdir -p out/styles
+          cp -r public/* out/
+          cp app/globals.css out/styles/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
