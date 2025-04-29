@@ -17,6 +17,11 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false }
     return config
+  },
+  // Add experimental features for better static export
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['@radix-ui/react-icons'],
   }
 }
 

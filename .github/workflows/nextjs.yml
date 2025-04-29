@@ -40,6 +40,8 @@ jobs:
           mkdir -p out/styles
           cp -r public/* out/
           cp app/globals.css out/styles/
+          # Create a .nojekyll file to prevent GitHub Pages from processing the site with Jekyll
+          touch out/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
