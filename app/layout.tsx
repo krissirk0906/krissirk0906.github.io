@@ -2,18 +2,11 @@
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import type React from "react"
 
 const inter = Inter({ subsets: ["latin"] })
-
-export const metadata: Metadata = {
-  title: "Thành Tâm - Mobile Developer",
-  description: "Mobile developer portfolio showcasing Android, iOS, and React Native projects and skills",
-  generator: 'v0.dev'
-}
 
 export default function RootLayout({
   children,
@@ -25,7 +18,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style jsx global>{`
+        <style>{`
           :root {
             --background: 0 0% 100%;
             --foreground: 0 0% 3.9%;
