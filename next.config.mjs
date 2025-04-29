@@ -20,7 +20,7 @@ const nextConfig = {
   },
   // Add experimental features for better static export
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false, // Disable CSS optimization temporarily
     optimizePackageImports: ['@radix-ui/react-icons'],
   }
 }
