@@ -13,12 +13,6 @@ const nextConfig = {
   basePath: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
   assetPrefix: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
   trailingSlash: true,
-  // Disable image optimization for static export
-  experimental: {
-    images: {
-      unoptimized: true,
-    },
-  },
   // Ensure static assets are properly handled
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false }
