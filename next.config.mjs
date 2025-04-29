@@ -20,8 +20,18 @@ const nextConfig = {
   },
   // Add experimental features for better static export
   experimental: {
-    optimizeCss: false, // Disable CSS optimization temporarily
+    optimizeCss: false,
     optimizePackageImports: ['@radix-ui/react-icons'],
+  },
+  // Add custom 404 page configuration
+  async redirects() {
+    return [
+      {
+        source: '/404',
+        destination: '/_not-found',
+        permanent: false,
+      },
+    ]
   }
 }
 
