@@ -6,10 +6,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  experimental: {
-    images: {
-      unoptimized: true,
-    }
+  images: {
+    unoptimized: true,
   },
   output: 'export',
   basePath: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
