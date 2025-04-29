@@ -27,14 +27,15 @@ jobs:
           cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
       - name: Install dependencies
         run: npm ci
       - name: Build with Next.js
-        run: npm run build
-      - name: Check output directory
-        run: ls -la && ls -la out || echo "out directory missing"
+        run: |
+          npm run build
+          if [ ! -d "out" ]; then
+            echo "Build failed - out directory not created"
+            exit 1
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

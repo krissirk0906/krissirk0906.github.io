@@ -12,8 +12,8 @@ const nextConfig = {
     }
   },
   output: 'export',
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  basePath: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
   trailingSlash: true,
   distDir: 'out'
 }
