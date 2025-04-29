@@ -36,6 +36,8 @@ jobs:
             echo "Build failed - out directory not created"
             exit 1
           fi
+          # Ensure static assets are properly copied
+          cp -r public/* out/ || true
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
