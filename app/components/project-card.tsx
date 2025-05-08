@@ -20,8 +20,9 @@ export default function ProjectCard({ title, description, image, link, tags }: P
         <Image
           src={image || "/placeholder.svg"}
           alt={title}
-          fill
-          className="object-cover transition-transform hover:scale-105"
+          width={400}
+          height={225}
+          className="w-full h-full object-contain transition-transform hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
         />
