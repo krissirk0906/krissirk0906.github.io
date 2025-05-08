@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import ContactForm from "./components/contact-form"
 import ProjectCard from "./components/project-card"
 import TechStack from "./components/tech-stack"
+import { IconWrapper } from "./components/icon-wrapper"
 
 export default function Page() {
   return (
@@ -47,19 +47,19 @@ export default function Page() {
             <div className="space-x-4">
               <Link href="https://github.com/krissirk0906" target="_blank">
                 <Button variant="outline" size="icon">
-                  <Github className="h-4 w-4" />
+                  <IconWrapper name="github" />
                   <span className="sr-only">GitHub</span>
                 </Button>
               </Link>
               <Link href="https://www.linkedin.com/in/thành-tâm-58b804190/" target="_blank">
                 <Button variant="outline" size="icon">
-                  <Linkedin className="h-4 w-4" />
+                  <IconWrapper name="linkedin" />
                   <span className="sr-only">LinkedIn</span>
                 </Button>
               </Link>
               <Link href="mailto:thanhtam961999@gmail.com">
                 <Button variant="outline" size="icon">
-                  <Mail className="h-4 w-4" />
+                  <IconWrapper name="mail" />
                   <span className="sr-only">Email</span>
                 </Button>
               </Link>

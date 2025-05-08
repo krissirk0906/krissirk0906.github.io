@@ -10,8 +10,8 @@ const nextConfig = {
     unoptimized: true,
   },
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io/' : '',
+  basePath: '/krissirk0906.github.io',
+  assetPrefix: '/krissirk0906.github.io/',
   trailingSlash: true,
   // Ensure static assets are properly handled
   webpack: (config) => {
@@ -22,16 +22,6 @@ const nextConfig = {
   experimental: {
     optimizeCss: false,
     optimizePackageImports: ['@radix-ui/react-icons'],
-  },
-  // Add custom 404 page configuration
-  async redirects() {
-    return [
-      {
-        source: '/404',
-        destination: '/_not-found',
-        permanent: false,
-      },
-    ]
   }
 }
 

@@ -1,7 +1,9 @@
+"use client"
+
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { IconWrapper } from "./icon-wrapper"
 
 interface ProjectCardProps {
   title: string
@@ -20,6 +22,8 @@ export default function ProjectCard({ title, description, image, link, tags }: P
           alt={title}
           fill
           className="object-cover transition-transform hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
         />
       </div>
       <CardContent className="p-4">
@@ -40,12 +44,12 @@ export default function ProjectCard({ title, description, image, link, tags }: P
         <Link href={link} target="_blank" className="inline-flex items-center gap-2 text-sm hover:underline">
           {link.includes("github.com") ? (
             <>
-              <Github className="h-4 w-4" />
+              <IconWrapper name="github" />
               View on GitHub
             </>
           ) : (
             <>
-              <ExternalLink className="h-4 w-4" />
+              <IconWrapper name="external-link" />
               View on Google Play
             </>
           )}
