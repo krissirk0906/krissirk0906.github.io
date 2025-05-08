@@ -27,14 +27,25 @@ jobs:
           cache: npm
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install critters --save-dev
       - name: Build with Next.js
-        run: npm run build
-      - name: Check output directory
-        run: ls -la && ls -la out || echo "out directory missing"
+        run: |
+          NODE_ENV=production npm run build
+          if [ ! -d "out" ]; then
+            echo "Build failed - out directory not created"
+            exit 1
+          fi
+          # Ensure static assets are properly copied
+          mkdir -p out/styles
+          cp -r public/* out/
+          cp app/globals.css out/styles/
+          # Create a .nojekyll file to prevent GitHub Pages from processing the site with Jekyll
+          touch out/.nojekyll
+          # Create a 404.html file for GitHub Pages
+          cp out/_not-found/index.html out/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
