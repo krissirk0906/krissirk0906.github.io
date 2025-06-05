@@ -73,14 +73,14 @@ export default function Page() {
             <ProjectCard
               title="AI Image Generator"
               description="Native Android application that transforms text prompts into stunning AI-generated images. Built with Jetpack Compose for a modern, fluid UI and integrated with advanced text-to-image AI models. Features include customizable generation parameters, image history, sharing capabilities, and style presets."
-              image="/placeholder.svg?height=400&width=600&text=AI+Image+Generator"
+              image="https://play-lh.googleusercontent.com/mAITFzrwolDxEYepe65SmyHhX6ys7_6sONpIfN3kaw5aPXKaNZDU6nNR0jMgNBTeZw=w240-h480-rw"
               link="https://play.google.com/store/apps/details?id=vn.junenine.ai_image"
               tags={["Android", "Kotlin", "Jetpack Compose", "AI", "Text-to-Image"]}
             />
             <ProjectCard
               title="GiotMauVang"
               description="A blood donation management application that helps users register and participate in blood donation activities. Features include donor registration, blood donation history tracking, and blood quality management. Built with modern Android architecture and best practices."
-              image="/placeholder.svg?height=400&width=600&text=GiotMauVang"
+              image="https://play-lh.googleusercontent.com/o1hPBxK_4uodqbEKfSOXC2GKF0v8tXWSfhXYUZcKHwtVLybCT3JmVsrh_Ly5fJfK_0wG=w240-h480-rw"
               link="https://play.google.com/store/apps/details?id=vn.intelin.giotmauvang"
               tags={["Android", "Kotlin", "Retrofit", "Hilt", "Jetpack"]}
             />

@@ -1,12 +1,16 @@
-'use client'
-
-import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Inter } from "next/font/google"
 import "./globals.css"
+import type { Metadata } from "next"
 import type React from "react"
+import ClientLayout from "./client-layout"
 
 const inter = Inter({ subsets: ["latin"] })
+
+export const metadata: Metadata = {
+  title: "Thành Tâm - Mobile Developer",
+  description: "Mobile Developer specializing in Android, iOS, and React Native development",
+}
 
 export default function RootLayout({
   children,
@@ -20,15 +24,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={cn("min-h-screen bg-background text-foreground font-sans antialiased", inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          storageKey="v0-theme"
-        >
-          {children}
-        </ThemeProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   )

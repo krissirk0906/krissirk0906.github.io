@@ -8,10 +8,17 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'play-lh.googleusercontent.com',
+        pathname: '/**',
+      },
+    ],
   },
   output: 'export',
-  basePath: '/krissirk0906.github.io',
-  assetPrefix: '/krissirk0906.github.io/',
+  basePath: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/krissirk0906.github.io/' : '',
   trailingSlash: true,
   // Ensure static assets are properly handled
   webpack: (config) => {
