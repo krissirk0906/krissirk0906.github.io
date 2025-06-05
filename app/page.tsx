@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import ContactForm from "./components/contact-form"
+import Contact from "@/components/Contact"
 import TechStack from "./components/tech-stack"
 import { IconWrapper } from "./components/icon-wrapper"
 import ProjectsSection from "./components/projects-section"
@@ -84,7 +84,7 @@ export default function Page() {
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
             Contact
           </h2>
-          <ContactForm />
+          <Contact />
         </section>
       </main>
 
