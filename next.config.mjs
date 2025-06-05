@@ -19,7 +19,7 @@ const nextConfig = {
       },
     ],
   },
-  // output: 'export',
+  output: 'export',
   // Only apply basePath in production
   basePath: isProduction ? basePath : '',
   // Remove assetPrefix as it's causing issues with static assets
