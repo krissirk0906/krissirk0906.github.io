@@ -11,9 +11,10 @@ interface ProjectCardProps {
   image: string
   link: string
   tags: string[]
+  appStoreLink?: string
 }
 
-export default function ProjectCard({ title, description, image, link, tags }: ProjectCardProps) {
+export default function ProjectCard({ title, description, image, link, tags, appStoreLink }: ProjectCardProps) {
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-video">
@@ -41,20 +42,17 @@ export default function ProjectCard({ title, description, image, link, tags }: P
           ))}
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 flex gap-4">
         <Link href={link} target="_blank" className="inline-flex items-center gap-2 text-sm hover:underline">
-          {link.includes("github.com") ? (
-            <>
-              <IconWrapper name="github" />
-              View on GitHub
-            </>
-          ) : (
-            <>
-              <IconWrapper name="external-link" />
-              View on Google Play
-            </>
-          )}
+          <IconWrapper name="external-link" />
+          Google Play
         </Link>
+        {appStoreLink && (
+          <Link href={appStoreLink} target="_blank" className="inline-flex items-center gap-2 text-sm hover:underline">
+            <IconWrapper name="external-link" />
+            App Store
+          </Link>
+        )}
       </CardFooter>
     </Card>
   )

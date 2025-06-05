@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import ContactForm from "./components/contact-form"
-import ProjectCard from "./components/project-card"
 import TechStack from "./components/tech-stack"
 import { IconWrapper } from "./components/icon-wrapper"
+import ProjectsSection from "./components/projects-section"
+import { ThemeToggle } from "./components/theme-toggle"
 
 export default function Page() {
   return (
@@ -26,9 +27,12 @@ export default function Page() {
               </Link>
             </nav>
           </div>
-          <Button variant="outline" className="ml-4">
-            Resume
-          </Button>
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <Button variant="outline" className="ml-4">
+              Resume
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -67,25 +71,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="projects" className="py-12 md:py-24 lg:py-32">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">Projects</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
-            <ProjectCard
-              title="AI Image Generator"
-              description="Native Android application that transforms text prompts into stunning AI-generated images. Built with Jetpack Compose for a modern, fluid UI and integrated with advanced text-to-image AI models. Features include customizable generation parameters, image history, sharing capabilities, and style presets."
-              image="https://play-lh.googleusercontent.com/mAITFzrwolDxEYepe65SmyHhX6ys7_6sONpIfN3kaw5aPXKaNZDU6nNR0jMgNBTeZw=w240-h480-rw"
-              link="https://play.google.com/store/apps/details?id=vn.junenine.ai_image"
-              tags={["Android", "Kotlin", "Jetpack Compose", "AI", "Text-to-Image"]}
-            />
-            <ProjectCard
-              title="GiotMauVang"
-              description="A blood donation management application that helps users register and participate in blood donation activities. Features include donor registration, blood donation history tracking, and blood quality management. Built with modern Android architecture and best practices."
-              image="https://play-lh.googleusercontent.com/o1hPBxK_4uodqbEKfSOXC2GKF0v8tXWSfhXYUZcKHwtVLybCT3JmVsrh_Ly5fJfK_0wG=w240-h480-rw"
-              link="https://play.google.com/store/apps/details?id=vn.intelin.giotmauvang"
-              tags={["Android", "Kotlin", "Retrofit", "Hilt", "Jetpack"]}
-            />
-          </div>
-        </section>
+        <ProjectsSection />
 
         <section className="py-12 md:py-24 lg:py-32">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
@@ -95,18 +81,16 @@ export default function Page() {
         </section>
 
         <section id="contact" className="py-12 md:py-24 lg:py-32">
-          <div className="mx-auto max-w-2xl">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
-              Get in Touch
-            </h2>
-            <ContactForm />
-          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-12 text-center">
+            Contact
+          </h2>
+          <ContactForm />
         </section>
       </main>
 
       <footer className="border-t">
         <div className="container flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6">
-          <p className="text-xs text-gray-500 dark:text-gray-400">© 2024 Thành Tâm. All rights reserved.</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 Thành Tâm. All rights reserved.</p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link className="text-xs hover:underline underline-offset-4" href="#">
               Terms of Service
