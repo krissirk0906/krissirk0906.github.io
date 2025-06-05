@@ -19,7 +19,7 @@ const nextConfig = {
       },
     ],
   },
-  output: 'export',
+  // output: 'export',
   // Only apply basePath in production
   basePath: isProduction ? basePath : '',
   // Remove assetPrefix as it's causing issues with static assets
@@ -30,10 +30,6 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false }
     // Ensure CSS modules are properly handled
-    config.module.rules.push({
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader'],
-    })
     return config
   },
   // Add experimental features for better static export
