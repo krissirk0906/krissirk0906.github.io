@@ -23,7 +23,7 @@ const nextConfig = {
   // Only apply basePath in production
   basePath: isProduction ? basePath : '',
   // Remove assetPrefix as it's causing issues with static assets
-  assetPrefix: '',
+  assetPrefix: isProduction ? basePath : '',
   // Remove trailingSlash as it can cause issues with static exports
   trailingSlash: false,
   // Ensure static assets are properly handled
