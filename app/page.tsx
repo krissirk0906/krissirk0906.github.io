@@ -95,6 +95,9 @@ export default function Page() {
             <Link className="text-xs hover:underline underline-offset-4" href="/privacy">
               Privacy Policy
             </Link>
+            <Link className="text-xs hover:underline underline-offset-4" href="/terms">
+              Terms & Conditions
+            </Link>
           </nav>
         </div>
       </footer>
