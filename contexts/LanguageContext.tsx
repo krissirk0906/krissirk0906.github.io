@@ -8,6 +8,7 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void
   t: (key: keyof typeof translations.en) => string
   availableLanguages: Record<Language, string>
+  isLoaded: boolean
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -15,20 +16,30 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en')
   const [isClient, setIsClient] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
     // Load language from localStorage on mount
-    const savedLanguage = localStorage.getItem('language') as Language
-    if (savedLanguage && languages[savedLanguage]) {
-      setLanguageState(savedLanguage)
+    try {
+      const savedLanguage = localStorage.getItem('language') as Language
+      if (savedLanguage && languages[savedLanguage]) {
+        setLanguageState(savedLanguage)
+      }
+    } catch (error) {
+      console.warn('Failed to load language from localStorage:', error)
     }
+    setIsLoaded(true)
   }, [])
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
     if (isClient) {
-      localStorage.setItem('language', lang)
+      try {
+        localStorage.setItem('language', lang)
+      } catch (error) {
+        console.warn('Failed to save language to localStorage:', error)
+      }
     }
   }
 
@@ -40,7 +51,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     language,
     setLanguage,
     t,
-    availableLanguages: languages
+    availableLanguages: languages,
+    isLoaded
   }
 
   return (
