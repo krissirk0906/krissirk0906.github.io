@@ -1,25 +1,30 @@
-import { Card } from "@/components/ui/card"
+"use client"
 
-const technologies = [
-  {
-    category: "Cross-Platform",
-    skills: ["React Native", "Flutter", "Expo", "JavaScript/TypeScript", "Redux", "MobX"],
-  },
-  {
-    category: "Android",
-    skills: ["Kotlin", "Java", "Jetpack Compose", "Room", "MVVM", "Material Design"],
-  },
-  {
-    category: "iOS",
-    skills: ["Swift", "SwiftUI", "UIKit", "Core Data", "ARKit", "XCTest"],
-  },
-  {
-    category: "Tools & Services",
-    skills: ["Firebase", "Git", "CI/CD", "Fastlane", "App Store Connect", "Google Play Console"],
-  },
-]
+import { Card } from "@/components/ui/card"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function TechStack() {
+  const { t } = useLanguage()
+
+  const technologies = [
+    {
+      category: t('crossPlatform'),
+      skills: ["React Native", "Flutter", "Expo", "JavaScript/TypeScript", "Redux", "MobX"],
+    },
+    {
+      category: t('android'),
+      skills: ["Kotlin", "Java", "Jetpack Compose", "Room", "MVVM", "Material Design"],
+    },
+    {
+      category: t('ios'),
+      skills: ["Swift", "SwiftUI", "UIKit", "Core Data", "ARKit", "XCTest"],
+    },
+    {
+      category: t('toolsServices'),
+      skills: ["Firebase", "Git", "CI/CD", "Fastlane", "App Store Connect", "Google Play Console"],
+    },
+  ]
+
   return (
     <div className="grid gap-6 md:grid-cols-2">
       {technologies.map((tech) => (

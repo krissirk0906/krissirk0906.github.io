@@ -1,8 +1,11 @@
+"use client"
+
 import { Metadata } from "next"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export const metadata: Metadata = {
   title: "Terms and Conditions - Remindly",
@@ -10,22 +13,24 @@ export const metadata: Metadata = {
 }
 
 export default function TermsAndConditions() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
+          {t('backToHome')}
         </Link>
         
         <Card className="p-8 shadow-lg">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-primary">Terms and Conditions</h1>
-            <p className="text-muted-foreground">Effective Date: June 15, 2025</p>
+            <h1 className="text-4xl font-bold mb-4 text-primary">{t('termsTitle')}</h1>
+            <p className="text-muted-foreground">{t('effectiveDate')}</p>
           </div>
           
           <p className="text-lg mb-12 text-center max-w-2xl mx-auto">
-            Welcome to Remindly. These Terms and Conditions outline the rules and regulations for using our mobile application.
+            {t('termsIntro')}
           </p>
 
           <div className="space-y-12">
@@ -91,7 +96,7 @@ export default function TermsAndConditions() {
                 <p className="text-muted-foreground">
                   Your privacy is important to us. Please review our{" "}
                   <Link href="/privacy" className="text-primary hover:underline font-medium">
-                    Privacy Policy
+                    {t('privacyPolicy')}
                   </Link>{" "}
                   to understand how we collect and use information.
                 </p>
@@ -210,7 +215,7 @@ export default function TermsAndConditions() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground">Thank you for using Remindly!</p>
+            <p className="text-muted-foreground">{t('thankYou')}</p>
           </div>
         </Card>
       </div>

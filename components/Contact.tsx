@@ -1,158 +1,176 @@
-'use client';
+"use client"
 
-import { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { init, send } from '@emailjs/browser';
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/LanguageContext"
+import emailjs from '@emailjs/browser'
 
-// Form validation schema
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-});
+type FormSchema = {
+  name: { required: boolean; minLength: number }
+  email: { required: boolean; pattern: RegExp }
+  message: { required: boolean; minLength: number }
+}
 
-type FormData = z.infer<typeof formSchema>;
+const formSchema: FormSchema = {
+  name: { required: true, minLength: 2 },
+  email: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
+  message: { required: true, minLength: 10 }
+}
 
-export default function Contact(): JSX.Element {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: 'success' | 'error' | null;
-    message: string;
-  }>({ type: null, message: '' });
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast()
+  const { t } = useLanguage()
 
-  // Initialize EmailJS
-  useEffect(() => {
-    try {
-      init("9SNdF1v3w0KmF-aKd");
-      console.log('EmailJS initialized successfully');
-    } catch (error) {
-      console.error('EmailJS initialization error:', error);
-    }
-  }, []);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
-
-  const onSubmit = async (data: FormData): Promise<void> => {
-    setIsSubmitting(true);
-    setSubmitStatus({ type: null, message: '' });
-
-    try {
-      const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        message: data.message,
-        to_name: 'Your Name',
-        reply_to: data.email,
-      };
-
-      console.log('Sending email with params:', templateParams);
-
-      const response = await send(
-        'service_snzfc97',
-        'template_jawqjt4',
-        templateParams
-      );
-
-      console.log('EmailJS response:', response);
-
-      if (response.status === 200) {
-        setSubmitStatus({
-          type: 'success',
-          message: 'Message sent successfully!',
-        });
-        reset();
-      } else {
-        throw new Error(`Unexpected response status: ${response.status}`);
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
+    
+    Object.entries(formSchema).forEach(([field, rules]) => {
+      const value = formData[field as keyof typeof formData]
+      
+      if (rules.required && !value) {
+        newErrors[field] = `${t(field as 'name' | 'email' | 'message')} is required`
+      } else if ('minLength' in rules && value.length < rules.minLength) {
+        newErrors[field] = `${t(field as 'name' | 'email' | 'message')} must be at least ${rules.minLength} characters`
+      } else if ('pattern' in rules && !rules.pattern.test(value)) {
+        newErrors[field] = `Please enter a valid ${t(field as 'name' | 'email' | 'message')}`
       }
+    })
+    
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!validateForm()) return
+    
+    setIsSubmitting(true)
+    
+    try {
+      // Initialize EmailJS
+      emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '')
+      
+      const result = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '',
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        }
+      )
+      
+      console.log('Email sent successfully:', result)
+      
+      toast({
+        title: "Success",
+        description: t('messageSent'),
+      })
+      
+      setFormData({ name: '', email: '', message: '' })
+      setErrors({})
+      
     } catch (error) {
-      console.error('EmailJS error details:', error);
-      setSubmitStatus({
-        type: 'error',
-        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
-      });
+      console.error('Error sending email:', error)
+      
+      toast({
+        title: "Error",
+        description: t('errorSending'),
+        variant: "destructive",
+      })
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: '' }))
+    }
+  }
 
   return (
-    <Card className="p-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-2">
-            Name
-          </label>
-          <Input
-            id="name"
-            {...register('name')}
-            placeholder="Your Name"
-          />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-2">
-            Email
-          </label>
-          <Input
-            id="email"
-            type="email"
-            {...register('email')}
-            placeholder="Your Email"
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-2">
-            Message
-          </label>
-          <Textarea
-            id="message"
-            {...register('message')}
-            placeholder="Your Message"
-            rows={5}
-          />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
-          )}
-        </div>
-
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
-        </Button>
-
-        {submitStatus.type && (
-          <p className={`text-sm text-center mt-4 ${
-            submitStatus.type === 'success' 
-              ? 'text-green-500' 
-              : 'text-red-500'
-          }`}>
-            {submitStatus.message}
-          </p>
-        )}
-      </form>
-    </Card>
-  );
+    <div className="max-w-2xl mx-auto">
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-center">{t('contactTitle')}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2">
+                {t('name')}
+              </label>
+              <Input
+                id="name"
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+                className={errors.name ? 'border-red-500' : ''}
+                placeholder={t('name')}
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+              )}
+            </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                {t('email')}
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                className={errors.email ? 'border-red-500' : ''}
+                placeholder={t('email')}
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+              )}
+            </div>
+            
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2">
+                {t('message')}
+              </label>
+              <Textarea
+                id="message"
+                value={formData.message}
+                onChange={(e) => handleInputChange('message', e.target.value)}
+                className={errors.message ? 'border-red-500' : ''}
+                placeholder={t('message')}
+                rows={5}
+              />
+              {errors.message && (
+                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+              )}
+            </div>
+            
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? t('sending') : t('sendMessage')}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  )
 } 
