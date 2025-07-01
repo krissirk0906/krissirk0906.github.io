@@ -1,12 +1,9 @@
-"use client"
-
 import { Metadata } from "next"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
-import { useLanguage } from "@/contexts/LanguageContext"
 
 export const metadata: Metadata = {
   title: "Privacy Policy - Remindly",
@@ -14,24 +11,22 @@ export const metadata: Metadata = {
 }
 
 export default function PrivacyPolicy() {
-  const { t } = useLanguage()
-
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-8">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          {t('backToHome')}
+          Back to Home
         </Link>
         
         <Card className="p-8 shadow-lg">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4 text-primary">{t('privacyTitle')}</h1>
-            <p className="text-muted-foreground">{t('effectiveDate')}</p>
+            <h1 className="text-4xl font-bold mb-4 text-primary">Privacy Policy</h1>
+            <p className="text-muted-foreground">Effective Date: June 15, 2025</p>
           </div>
           
           <p className="text-lg mb-12 text-center max-w-2xl mx-auto">
-            {t('privacyIntro')}
+            Remindly respects your privacy. This policy explains how we collect, use, and safeguard your information when you use our mobile application.
           </p>
 
           <div className="space-y-12">
@@ -174,7 +169,7 @@ export default function PrivacyPolicy() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground">{t('thankYou')}</p>
+            <p className="text-muted-foreground">Thank you for using Remindly!</p>
           </div>
         </Card>
       </div>
