@@ -6,6 +6,13 @@ import { Button } from "@/components/ui/button"
 
 const projects = [
   {
+    title: "Remindly",
+    description: "Remindly is a modern reminder app that helps you stay organized and never miss a task. Set reminders by time, date, or location with a clean, user-friendly interface. View your day in a simple timeline, customize alerts, and manage tasks with ease. Whether it's a meeting, medication, or a personal goal, Remindly keeps you on track. Includes dark/light themes, repeat options, and full privacy—no data sharing. Stay productive and focused with Remindly.",
+    image: "https://play-lh.googleusercontent.com/oOtVDSYcka_L-oW51wGxfvhLfM7AwUBRcMb-gEZlqV48XvFvX-AXWM56VMZYXqqiAw=w240-h480-rw",
+    link: "https://play.google.com/store/apps/details?id=com.junenine.remindly",
+    tags: ["Android", "Reminder", "Productivity", "Privacy"]
+  },
+  {
     title: "AI Image Generator",
     description: "Native Android application that transforms text prompts into stunning AI-generated images. Built with Jetpack Compose for a modern, fluid UI and integrated with advanced text-to-image AI models. Features include customizable generation parameters, image history, sharing capabilities, and style presets.",
     image: "https://play-lh.googleusercontent.com/mAITFzrwolDxEYepe65SmyHhX6ys7_6sONpIfN3kaw5aPXKaNZDU6nNR0jMgNBTeZw=w240-h480-rw",
