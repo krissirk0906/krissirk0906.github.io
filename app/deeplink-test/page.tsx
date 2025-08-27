@@ -18,8 +18,8 @@ export default function DeeplinkTestPage() {
       
       // Android App Links
       { property: 'al:android:url', content: 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b' },
-      { property: 'al:android:package', content: 'com.locstoc.consumer.internal' },
-      { property: 'al:android:app_name', content: 'UAT LocStoc' },
+      { property: 'al:android:package', content: 'com.locstock.o2o.dev' },
+      { property: 'al:android:app_name', content: 'LocStoc' },
       
       // Web fallback (when app is not installed)
       { property: 'al:web:url', content: 'https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b' },
@@ -148,8 +148,8 @@ export default function DeeplinkTestPage() {
 
 <!-- Android App Links -->
 <meta property="al:android:url" content="o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b">
-<meta property="al:android:package" content="com.locstoc.consumer.internal">
-<meta property="al:android:app_name" content="UAT LocStoc">
+<meta property="al:android:package" content="com.locstock.o2o.dev">
+<meta property="al:android:app_name" content="LocStoc">
 
 <!-- Web Fallback -->
 <meta property="al:web:url" content="https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b">
