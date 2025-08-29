@@ -25,6 +25,48 @@
       <p style="color: #374151; margin-bottom: 1rem;">This static page includes Open Graph and Facebook App Links meta tags rendered on first load.</p>
       <p><a href="/facebook-app-links/">Permalink</a></p>
     </main>
+    <script>
+      (function() {
+        var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        var isAndroid = /Android/i.test(navigator.userAgent);
+
+        var deeplink = 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b';
+        var webFallback = 'https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b';
+
+        var opened = false;
+
+        function tryOpen() {
+          var now = Date.now();
+          // Attempt to open the custom scheme
+          window.location.href = deeplink;
+
+          // Fallback: if still on page after delay, go to web
+          setTimeout(function() {
+            if (document.visibilityState === 'visible' && !opened && Date.now() - now > 700) {
+              window.location.href = webFallback;
+            }
+          }, 1200);
+        }
+
+        document.addEventListener('visibilitychange', function() {
+          if (document.visibilityState === 'hidden') {
+            opened = true;
+          }
+        });
+
+        // Delay slightly to allow meta tags to be processed by crawlers
+        window.addEventListener('load', function() {
+          // Avoid auto-open inside known in-app browsers that block schemes
+          var ua = navigator.userAgent.toLowerCase();
+          var isFacebookInApp = ua.indexOf('fbav') !== -1 || ua.indexOf('fb_iab') !== -1 || ua.indexOf('instagram') !== -1;
+          if (isFacebookInApp) return; // Users must tap "Open in external browser"
+
+          if (isIOS || isAndroid) {
+            setTimeout(tryOpen, 400);
+          }
+        });
+      })();
+    </script>
   </body>
   </html>
 
