@@ -1,35 +1,71 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'David Tate Ariana Pump - Black Suede | LocStoc',
-  description: 'Check out this amazing David Tate Ariana Pump in Black Suede. Available on LocStoc!',
-  openGraph: {
-    url: 'https://krissirk0906.github.io/deeplink-test',
-    title: 'David Tate Ariana Pump - Black Suede',
-    description: 'Check out this amazing David Tate Ariana Pump in Black Suede. Available on LocStoc!',
-    images: ['https://krissirk0906.github.io/images/pic01.jpg'],
-    type: 'website',
-    siteName: 'LocStoc'
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'David Tate Ariana Pump - Black Suede',
-    description: 'Check out this amazing David Tate Ariana Pump in Black Suede. Available on LocStoc!',
-    images: ['https://krissirk0906.github.io/images/pic01.jpg']
-  },
-  other: {
-    'al:ios:url': 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b',
-    'al:ios:app_store_id': '6744225405',
-    'al:ios:app_name': 'UAT LocStoc Consumer',
-    'al:android:url': 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b',
-    'al:android:package': 'com.locstock.o2o.dev',
-    'al:android:app_name': 'LocStoc',
-    'al:web:url': 'https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b',
-    'al:web:should_fallback': 'true'
-  }
-}
+import { useEffect, useState } from 'react'
 
 export default function DeeplinkTestPage() {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    
+    // Add Facebook App Links meta tags dynamically
+    // These are the required meta tags for Facebook App Links to work properly
+    const metaTags = [
+      // iOS App Links
+      { property: 'al:ios:url', content: 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b' },
+      { property: 'al:ios:app_store_id', content: '6744225405' },
+      { property: 'al:ios:app_name', content: 'UAT LocStoc Consumer' },
+      
+      // Android App Links
+      { property: 'al:android:url', content: 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b' },
+      { property: 'al:android:package', content: 'com.locstock.o2o.dev' },
+      { property: 'al:android:app_name', content: 'LocStoc' },
+      
+      // Web fallback (when app is not installed)
+      { property: 'al:web:url', content: 'https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b' },
+      { property: 'al:web:should_fallback', content: 'true' },
+      
+      // Open Graph meta tags (required for Facebook sharing)
+      { property: 'og:title', content: 'David Tate Ariana Pump - Black Suede' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://krissirk0906.github.io/deeplink-test' },
+      { property: 'og:description', content: 'Check out this amazing David Tate Ariana Pump in Black Suede. Available on LocStoc!' },
+      { property: 'og:image', content: 'https://krissirk0906.github.io/images/pic01.jpg' },
+      { property: 'og:site_name', content: 'LocStoc' },
+      
+      // Twitter Card meta tags for better social sharing
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'David Tate Ariana Pump - Black Suede' },
+      { name: 'twitter:description', content: 'Check out this amazing David Tate Ariana Pump in Black Suede. Available on LocStoc!' },
+      { name: 'twitter:image', content: 'https://krissirk0906.github.io/images/pic01.jpg' },
+    ]
+
+    // Remove existing meta tags to avoid duplicates
+    metaTags.forEach(tag => {
+      const existing = document.querySelector(`meta[property="${tag.property}"]`) || 
+                      document.querySelector(`meta[name="${tag.name}"]`)
+      if (existing) {
+        existing.remove()
+      }
+    })
+
+    // Add new meta tags
+    metaTags.forEach(tag => {
+      const meta = document.createElement('meta')
+      if (tag.property) {
+        meta.setAttribute('property', tag.property)
+      }
+      if (tag.name) {
+        meta.setAttribute('name', tag.name)
+      }
+      meta.setAttribute('content', tag.content)
+      document.head.appendChild(meta)
+    })
+
+    // Set page title
+    document.title = 'David Tate Ariana Pump - Black Suede | LocStoc'
+  }, [])
+
   const testDeeplink = (platform: 'ios' | 'android') => {
     const url = platform === 'ios' 
       ? 'o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b'
@@ -72,6 +108,24 @@ export default function DeeplinkTestPage() {
       document.body.removeChild(textArea)
       alert('Page URL copied to clipboard! Share this on Facebook to test App Links.')
     })
+  }
+
+  // Don't render until client-side to avoid hydration mismatch
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white shadow-lg rounded-lg p-8">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded mb-6"></div>
+              <div className="h-4 bg-gray-200 rounded mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
