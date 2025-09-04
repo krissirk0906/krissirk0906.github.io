@@ -21,11 +21,11 @@ export default function Head() {
       {/* Facebook App Links */}
       {/* iOS */}
       <meta property="al:ios:url" content="o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b" />
-      <meta property="al:ios:app_store_id" content="6744225405" />
-      <meta property="al:ios:app_name" content="UAT LocStoc Consumer" />
+      <meta property="al:ios:app_store_id" content="6746748970" />
+      <meta property="al:ios:app_name" content="LocStoc" />
       {/* Android */}
       <meta property="al:android:url" content="o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b" />
-      <meta property="al:android:package" content="com.locstock.o2o.dev" />
+      <meta property="al:android:package" content="com.locstoc.shopapp" />
       <meta property="al:android:app_name" content="LocStoc" />
       {/* Web fallback */}
       <meta property="al:web:url" content="https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b" />
