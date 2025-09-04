@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Opening LocStoc…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Open Graph (nice share preview) -->
+  <meta property="og:title" content="Open in LocStoc" />
+  <meta property="og:description" content="Tap to open the product in the LocStoc app." />
+  <meta property="og:image" content="https://o2o.dev.locstoc.com/og/preview.png" />
+  <meta property="og:url" content="https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b" />
+
+  <!-- Facebook/IG App Links (your exact data) -->
+  <!-- iOS -->
+  <meta property="al:ios:url" content="o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b">
+  <meta property="al:ios:app_store_id" content="6744225405">
+  <meta property="al:ios:app_name" content="UAT LocStoc Consumer">
+  <!-- Android -->
+  <meta property="al:android:url" content="o2o-dev://product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b">
+  <meta property="al:android:package" content="com.locstock.o2o.dev">
+  <meta property="al:android:app_name" content="LocStoc">
+  <!-- Web fallback -->
+  <meta property="al:web:url" content="https://o2o.dev.locstoc.com/product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b">
+  <meta property="al:web:should_fallback" content="true">
+
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 32px; line-height: 1.5; }
+    .wrap { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; margin: 0 0 12px; }
+    p  { margin: 0 0 20px; opacity: .9; }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      padding: 12px 16px; border-radius: 12px; text-decoration: none; display: inline-block;
+      border: 1px solid color-mix(in oklab, currentColor 25%, transparent);
+    }
+    .hint { font-size: .9rem; opacity: .7; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Opening LocStoc…</h1>
+    <p>If nothing happens, use the buttons below.</p>
+    <div class="btns">
+      <a id="open" class="btn" href="#">Open in app</a>
+      <a id="store" class="btn" href="#">Get the app</a>
+    </div>
+    <p class="hint" id="ctxHint"></p>
+    <noscript>This page uses a small script to open the app automatically. Please enable JavaScript or tap “Open in app”.</noscript>
+  </div>
+
+  <script>
+    (function () {
+      // Fixed deep link you provided
+      const deepPath = 'product/womenaposs-david-tate-ariana-pump-black-suede.119f26f90001b3834c980191ea5c1c2b';
+
+      // Links (from your data)
+      const schemeLink = `o2o-dev://${deepPath}`;
+      const httpsLink  = `https://o2o.dev.locstoc.com/${deepPath}`; // doubles as Universal/App Link if configured
+
+      // Stores
+      const iosStore     = 'https://apps.apple.com/app/id6744225405';
+      const androidStore = `https://play.google.com/store/apps/details?id=com.locstock.o2o.dev&referrer=${
+        encodeURIComponent('utm_source=deeplink&d=' + deepPath)
+      }`;
+
+      // UA detection
+      const ua = navigator.userAgent || '';
+      const isiOS    = /iPad|iPhone|iPod/.test(ua);
+      const isAndroid= /Android/.test(ua);
+      const inFB     = /FBAN|FBAV|FB_IAB/.test(ua);
+      const inIG     = /Instagram/.test(ua);
+      const inX      = /Twitter/.test(ua); // some behaviors similar to FB/IG
+
+      // Hook up buttons
+      document.getElementById('open').href  = schemeLink;
+      document.getElementById('store').href = isiOS ? iosStore : androidStore;
+
+      const hint = document.getElementById('ctxHint');
+      if (inFB || inIG) {
+        hint.textContent = 'Opened inside Facebook/Instagram — tap the banner/button at the top to open the app.';
+      } else if (inX) {
+        hint.textContent = 'Opened inside X (Twitter) — if auto-open is blocked, tap “Open in app”.';
+      }
+
+      // Open strategy:
+      // - Inside FB/IG: let their native "Open" button (from App Links meta) handle it; auto opens are often blocked.
+      // - Elsewhere on mobile: try https (UL/AL) first; fall back to custom scheme; if it fails, go to the store.
+      function openOrStore() {
+        const start   = Date.now();
+        const timeout = 1500;
+
+        // Prefer https (Universal/App Link). If domain is not associated, it will just open the website.
+        window.location.href = httpsLink;
+
+        // After a short delay, try custom scheme (covers cases where UL doesn't trigger app)
+        setTimeout(() => { window.location.href = schemeLink; }, 200);
+
+        // If we’re still here after timeout, assume app not installed → store
+        setTimeout(() => {
+          if (Date.now() - start < timeout + 250) {
+            window.location.href = isiOS ? iosStore : androidStore;
+          }
+        }, timeout);
+      }
+
+      if (isiOS || isAndroid) {
+        if (!(inFB || inIG)) {
+          openOrStore();
+        }
+        // In FB/IG, do nothing automatically; App Links meta renders their native "Open" CTA.
+      } else {
+        // Desktop: optionally send to your product page or show a QR instead
+        // window.location.href = httpsLink;
+      }
+    })();
+  </script>
+</body>
+</html>
+
+
