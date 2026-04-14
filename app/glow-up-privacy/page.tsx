@@ -2,12 +2,11 @@ import { Metadata } from "next"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - Remindly",
-  description: "Privacy Policy for Remindly mobile application",
+  title: "Privacy Policy - Glow Up RPG",
+  description: "Privacy Policy for Glow Up RPG mobile application",
 }
 
 export default function PrivacyPolicy() {
@@ -22,11 +21,11 @@ export default function PrivacyPolicy() {
         <Card className="p-8 shadow-lg">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-4 text-primary">Privacy Policy</h1>
-            <p className="text-muted-foreground">Effective Date: June 15, 2025</p>
+            <p className="text-muted-foreground">Effective Date: July 1, 2025</p>
           </div>
           
           <p className="text-lg mb-12 text-center max-w-2xl mx-auto">
-            June 9 Studio respects your privacy. This policy explains how we collect, use, and safeguard your information when you use the Remindly application developed by June 9 Studio.
+            June 9 Studio respects your privacy. This policy explains how we collect, use, and safeguard your information when you use the Glow Up RPG application developed by June 9 Studio.
           </p>
 
           <div className="space-y-12">
@@ -41,14 +40,14 @@ export default function PrivacyPolicy() {
                     <span className="text-primary mr-2">•</span>
                     <div>
                       <strong className="text-foreground">Personal Information:</strong>
-                      <p className="text-muted-foreground mt-1">When you voluntarily provide your name, email address, or phone number (e.g., for profile setup).</p>
+                      <p className="text-muted-foreground mt-1">When voluntarily provided, such as profile setup data or when contacting support.</p>
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
                     <div>
                       <strong className="text-foreground">Usage Data:</strong>
-                      <p className="text-muted-foreground mt-1">Anonymous usage data, such as how you interact with reminders and app screens, may be collected for improving app functionality.</p>
+                      <p className="text-muted-foreground mt-1">Anonymous game usage statistics may be collected to improve gameplay features and app stability.</p>
                     </div>
                   </li>
                 </ul>
@@ -66,15 +65,11 @@ export default function PrivacyPolicy() {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <p className="text-muted-foreground">To display and manage your reminders</p>
+                    <p className="text-muted-foreground">To save your game progress and preferences.</p>
                   </li>
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
-                    <p className="text-muted-foreground">To improve the app's performance and user experience</p>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-primary mr-2">•</span>
-                    <p className="text-muted-foreground">To personalize features based on user preferences</p>
+                    <p className="text-muted-foreground">To improve the app's performance and balancing.</p>
                   </li>
                 </ul>
               </div>
@@ -89,7 +84,7 @@ export default function PrivacyPolicy() {
               </h2>
               <div className="bg-muted/50 rounded-lg p-6">
                 <p className="text-muted-foreground">
-                  All personal data is stored locally on your device and never shared with third parties. No data is uploaded to cloud servers unless explicitly stated or supported via external backup options.
+                  Your data is stored locally on your device and never shared with third parties. No data is uploaded to cloud servers unless using external backup services like Google Play Games.
                 </p>
               </div>
             </section>
@@ -103,7 +98,7 @@ export default function PrivacyPolicy() {
               </h2>
               <div className="bg-muted/50 rounded-lg p-6">
                 <p className="text-muted-foreground">
-                  We retain your reminders and related data only for as long as you keep the app installed on your device. Once the app is uninstalled, all locally stored data is permanently deleted.
+                  We retain your game progress and related data only for as long as you keep the app installed on your device. Once the app is uninstalled, all locally stored data is permanently deleted.
                 </p>
               </div>
             </section>
@@ -123,7 +118,7 @@ export default function PrivacyPolicy() {
                   <li className="flex items-start">
                     <span className="text-primary mr-2">•</span>
                     <p className="text-muted-foreground">
-                      <strong>Uninstalling the app:</strong> This immediately and permanently deletes all locally saved reminders and associated data on your device.
+                      <strong>Uninstalling the app:</strong> This immediately and permanently deletes all locally saved game progress and associated data on your device.
                     </p>
                   </li>
                   <li className="flex items-start">
@@ -141,20 +136,6 @@ export default function PrivacyPolicy() {
             <section>
               <h2 className="text-2xl font-semibold mb-6 text-primary flex items-center">
                 <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">6</span>
-                Permissions
-              </h2>
-              <div className="bg-muted/50 rounded-lg p-6">
-                <p className="text-muted-foreground">
-                  Remindly may request permissions such as location (for location-based reminders) and notifications (to deliver alerts). These are strictly used to support core app functionality.
-                </p>
-              </div>
-            </section>
-
-            <Separator />
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-6 text-primary flex items-center">
-                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">7</span>
                 Third-Party Services
               </h2>
               <div className="bg-muted/50 rounded-lg p-6">
@@ -168,7 +149,7 @@ export default function PrivacyPolicy() {
 
             <section>
               <h2 className="text-2xl font-semibold mb-6 text-primary flex items-center">
-                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">8</span>
+                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">7</span>
                 Security
               </h2>
               <div className="bg-muted/50 rounded-lg p-6">
@@ -182,21 +163,7 @@ export default function PrivacyPolicy() {
 
             <section>
               <h2 className="text-2xl font-semibold mb-6 text-primary flex items-center">
-                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">9</span>
-                Changes to This Policy
-              </h2>
-              <div className="bg-muted/50 rounded-lg p-6">
-                <p className="text-muted-foreground">
-                  We may update this Privacy Policy periodically. We encourage you to review this page for any changes.
-                </p>
-              </div>
-            </section>
-
-            <Separator />
-
-            <section>
-              <h2 className="text-2xl font-semibold mb-6 text-primary flex items-center">
-                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">10</span>
+                <span className="bg-primary/10 text-primary rounded-full w-8 h-8 flex items-center justify-center mr-3">8</span>
                 Contact Us
               </h2>
               <div className="bg-muted/50 rounded-lg p-6">
@@ -211,10 +178,10 @@ export default function PrivacyPolicy() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-muted-foreground">Thank you for using Remindly!</p>
+            <p className="text-muted-foreground">Thank you for playing Glow Up RPG!</p>
           </div>
         </Card>
       </div>
     </div>
   )
-} 
+}
