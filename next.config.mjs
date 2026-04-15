@@ -2,7 +2,6 @@
 const isProduction = process.env.NODE_ENV === 'production'
 
 const nextConfig = {
-  distDir: '.next_dev',
   eslint: {
     ignoreDuringBuilds: true,
   },

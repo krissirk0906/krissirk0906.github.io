@@ -20,32 +20,42 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: false
-      
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-      
+          cache: npm
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Install dependencies
-        run: pnpm install
-      
+        run: npm ci
+
       - name: Build with Next.js
-        run: pnpm build
-      
+        run: NODE_ENV=production npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "out" ]; then
+            echo "ERROR: out directory not found. Build may have failed."
+            exit 1
+          fi
+          echo "Build output contents:"
+          ls -la out/
+
+      - name: Add .nojekyll
+        run: touch out/.nojekyll
+
+      - name: Create 404.html
+        run: |
+          if [ -f "out/_not-found/index.html" ]; then
+            cp out/_not-found/index.html out/404.html
+          elif [ -f "out/404/index.html" ]; then
+            cp out/404/index.html out/404.html
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -60,4 +70,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
