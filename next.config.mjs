@@ -19,7 +19,7 @@ const nextConfig = {
     ],
   },
   output: 'export',
-  trailingSlash: false,
+  trailingSlash: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false }
     return config
